@@ -13,22 +13,22 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import FBSDK, {LoginManager} from "react-native-fbsdk";
+import FBSDK, {LoginManager, LoginButton} from "react-native-fbsdk";
 
 export default class App extends Component<{}> {
 
   _fbAuth(){
     LoginManager.logInWithReadPermissions(["public_profile"])
-    .then((result) => {
-      if (result.isCancelled){
-        console.log("Login Cancelled");
-      }else{
-        console.log("Login Success: " + result.grantedPermissions);
-      }
-    })
-    .catch(error =>{
-        console.log("An error occured: " + error);
+      .then((result) => {
+        if (result.isCancelled){
+          console.log("Login Cancelled");
+        }else{
+          console.log("Login Success: " + result.grantedPermissions);
+        }
       })
+      .catch(error =>{
+          console.log("An error occured: " + error);
+        })
     
   }
   render() {
