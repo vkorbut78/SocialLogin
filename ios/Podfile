@@ -8,6 +8,7 @@ target 'SocialLogin' do
   # Pods for SocialLogin
 	pod “FBSDKCoreKit”
 	pod “FBSDKLoginKit”
+    pod "FBSDKShareKit"
   target 'SocialLogin-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
