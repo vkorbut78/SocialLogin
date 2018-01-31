@@ -9,29 +9,32 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import FBSDK, {LoginManager} from "react-native-fbsdk";
 
 export default class App extends Component<{}> {
+
+  _fbAuth(){
+    LoginManager.logInWithReadPermission(["public_profile"])
+    .then(function(result){
+      if (result.isCancelled){
+        console.log("Login Cancelled");
+      }else{
+        console.log("Login Success: " + result.grantedPermissions);
+      }
+    }function(error){
+        console.log("An error occured: " + error);
+      })
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <TouchableOpacity onPress={this._fbAuth}>
+        Login with facebook
+        </TouchableOpacity>
       </View>
     );
   }
